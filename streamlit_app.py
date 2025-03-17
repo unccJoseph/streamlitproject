@@ -14,9 +14,16 @@ selected_category = st.selectbox("Select a Category:", category_options)
 if selected_category != "All":
     df = df[df["Category"] == selected_category]
 
+# Multi-select for Sub_Category within the selected Category
+sub_category_options = df["Sub_Category"].unique().tolist()
+selected_sub_categories = st.multiselect("Select Sub-Categories:", sub_category_options, default=sub_category_options)
+
+# Filter by selected sub-categories
+df = df[df["Sub_Category"].isin(selected_sub_categories)]
+
 st.dataframe(df)
 
-# Bar chart (filtered or not)
+# Bar chart (filtered)
 st.bar_chart(df, x="Category", y="Sales")
 
 # Aggregated chart

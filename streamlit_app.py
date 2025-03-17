@@ -40,3 +40,7 @@ st.line_chart(sales_by_month, y="Sales")
 
 st.dataframe(sales_by_month)
 st.line_chart(sales_by_month, y="Sales")
+
+
+st.dataframe(sales_by_month)
+st.line_chart(sales_by_month, y="Sales")

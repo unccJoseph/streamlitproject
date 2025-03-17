@@ -21,6 +21,18 @@ selected_sub_categories = st.multiselect("Select Sub-Categories:", sub_category_
 # Filter by selected sub-categories
 df = df[df["Sub_Category"].isin(selected_sub_categories)]
 
+# Calculate metrics
+total_sales = df["Sales"].sum()
+total_profit = df["Profit"].sum()
+profit_margin = (total_profit / total_sales) * 100 if total_sales != 0 else 0
+
+# Display metrics
+st.write("### (4) Key Metrics for Selected Items")
+col1, col2, col3 = st.columns(3)
+col1.metric("Total Sales", f"${total_sales:,.2f}")
+col2.metric("Total Profit", f"${total_profit:,.2f}")
+col3.metric("Profit Margin", f"{profit_margin:.2f}%")
+
 st.dataframe(df)
 
 # Bar chart (filtered)
@@ -37,10 +49,6 @@ sales_by_month = df.filter(items=['Sales']).groupby(pd.Grouper(freq='M')).sum()
 
 st.write("### (3) Sales Over Time for Selected Items")
 st.line_chart(sales_by_month, y="Sales")
-
-st.dataframe(sales_by_month)
-st.line_chart(sales_by_month, y="Sales")
-
 
 st.dataframe(sales_by_month)
 st.line_chart(sales_by_month, y="Sales")

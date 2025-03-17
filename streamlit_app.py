@@ -35,5 +35,8 @@ df["Order_Date"] = pd.to_datetime(df["Order_Date"])
 df.set_index('Order_Date', inplace=True)
 sales_by_month = df.filter(items=['Sales']).groupby(pd.Grouper(freq='M')).sum()
 
+st.write("### (3) Sales Over Time for Selected Items")
+st.line_chart(sales_by_month, y="Sales")
+
 st.dataframe(sales_by_month)
 st.line_chart(sales_by_month, y="Sales")
